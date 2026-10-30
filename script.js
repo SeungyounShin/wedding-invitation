@@ -113,6 +113,7 @@
   }
 
   /* ── 스크롤 등장 ── */
+  document.documentElement.classList.add('js');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
