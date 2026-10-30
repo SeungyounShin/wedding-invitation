@@ -13,4 +13,4 @@ https://seungyounshin.github.io/wedding-invitation/
 
 ## 날짜나 장소를 바꿀 때
 
-`index.html`(본문, 달력, og 태그), `script.js`(남은 일수), `invite.ics`, `images/og.png`를 함께 고친다.
+`index.html`(본문, 달력, og 태그), `invite.ics`, `images/og.png`를 함께 고친다.

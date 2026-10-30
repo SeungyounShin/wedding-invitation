@@ -31,15 +31,6 @@ const copy = async (text, msg) => {
   showToast(msg);
 };
 
-// 보는 사람의 시간대와 상관없이 한국 날짜로 센다
-const kstDay = ms => Math.floor((ms + 9 * 3600000) / 86400000);
-const left = kstDay(Date.parse('2027-01-03T12:00:00+09:00')) - kstDay(Date.now());
-if (left >= 0) {
-  const dday = document.getElementById('dday');
-  dday.textContent = left === 0 ? '오늘입니다' : `${left}일 남았습니다`;
-  dday.hidden = false;
-}
-
 if (PHOTOS.length) {
   const box = document.getElementById('photos');
   PHOTOS.forEach(name => {
@@ -89,3 +80,65 @@ document.getElementById('share').addEventListener('click', async () => {
   }
   copy(url, '링크를 복사했습니다');
 });
+
+const couple = document.getElementById('couple');
+couple.addEventListener('click', () => {
+  couple.classList.remove('hop');
+  void couple.offsetWidth;
+  couple.classList.add('hop');
+});
+
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const root = document.documentElement;
+  root.classList.add('motion', 'sealed');
+
+  const seen = new IntersectionObserver(entries => {
+    entries.forEach(({ isIntersecting, target }) => {
+      if (isIntersecting) {
+        target.querySelectorAll(':scope > .write').forEach(el => el.classList.add('on'));
+        seen.unobserve(target);
+      }
+    });
+  }, { rootMargin: '0px 0px -12% 0px' });
+
+  const seal = document.getElementById('seal');
+  seal.hidden = false;
+  const open = () => {
+    if (seal.classList.contains('open')) return;
+    seal.classList.add('open');
+    root.classList.remove('sealed');
+    setTimeout(() => {
+      // 다 가려진 글자는 화면에 들어와도 감지되지 않아 부모를 지켜본다
+      document.querySelectorAll('.write').forEach(el => seen.observe(el.parentElement));
+      document.getElementById('couple').classList.add('on');
+    }, 700);
+    setTimeout(() => seal.remove(), 1400);
+  };
+  seal.addEventListener('click', open);
+  // 누르지 않고 스크롤부터 해도 막히지 않게 한다
+  seal.addEventListener('wheel', open, { passive: true });
+  seal.addEventListener('touchmove', open, { passive: true });
+
+  const NS = 'http://www.w3.org/2000/svg';
+  addEventListener('pointerdown', ({ clientX, clientY }) => {
+    for (let i = 0; i < 6; i++) {
+      const star = document.createElementNS(NS, 'svg');
+      star.setAttribute('class', 'spark');
+      star.style.left = `${clientX - 8}px`;
+      star.style.top = `${clientY - 8}px`;
+      const use = document.createElementNS(NS, 'use');
+      use.setAttribute('href', '#flower');
+      star.append(use);
+      document.body.append(star);
+      const angle = (i / 6) * Math.PI * 2 + Math.random() * 0.6;
+      const reach = 28 + Math.random() * 28;
+      star.animate(
+        [
+          { transform: 'translate(0, 0) scale(0.3)', opacity: 1 },
+          { transform: `translate(${Math.cos(angle) * reach}px, ${Math.sin(angle) * reach}px) scale(1) rotate(90deg)`, opacity: 0 },
+        ],
+        { duration: 650, easing: 'ease-out' },
+      ).onfinish = () => star.remove();
+    }
+  });
+}
