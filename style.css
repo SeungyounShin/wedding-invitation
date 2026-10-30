@@ -73,7 +73,7 @@ h2 { font: 400 13cqw/1.1 var(--hand); }
 .when { font-weight: 700; line-height: 1.7; font-size: 15px; }
 
 .letter { padding: 24px var(--gutter) 56px; }
-.letter > p { font: 400 8.2cqw/1.35 var(--hand); }
+.letter > p { font: 400 7.2cqw/1.45 var(--hand); }
 .family { margin-top: 44px; }
 .family > div { padding: 10px 0; }
 .family dt { font-size: 15px; }
