@@ -3,220 +3,95 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#ffffff">
 <title>신승윤 · 최유라 결혼합니다</title>
 <meta name="description" content="2027년 1월 3일 일요일 낮 12시, 롯데호텔 서울 38층 무궁화">
 
-<!-- 카카오톡/링크 미리보기. images/og.jpg 를 넣으면 썸네일로 보입니다. -->
-<meta property="og:title" content="신승윤 · 최유라 결혼합니다">
-<meta property="og:description" content="2027. 1. 3. 일요일 낮 12시 · 롯데호텔 서울 38층 무궁화">
-<meta property="og:image" content="images/og.jpg">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://seungyounshin.github.io/wedding-invitation/">
+<meta property="og:title" content="신승윤 · 최유라 결혼합니다">
+<meta property="og:description" content="2027년 1월 3일 일요일 낮 12시, 롯데호텔 서울 38층 무궁화">
+<meta property="og:image" content="https://seungyounshin.github.io/wedding-invitation/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
-
-<!-- 예식 일시. 달력, 디데이, 캘린더 저장 버튼이 모두 이 값을 읽습니다. -->
-<body data-date="2027-01-03T12:00:00+09:00">
+<body>
 <main class="page">
 
-  <!-- ───────── 표지 ───────── -->
   <header class="cover">
-    <p class="cover__eyebrow">Wedding Invitation</p>
-
-    <h1 class="cover__names">
+    <h1 class="names">
       <span>신승윤</span>
-      <span class="cover__and" aria-label="그리고">and</span>
       <span>최유라</span>
+      <small>결혼합니다</small>
     </h1>
-
-    <figure class="cover__photo">
-      <!-- images/cover.jpg 를 넣으면 사진이 뜨고, 없으면 아래 타이포 버전이 보입니다. -->
-      <img src="images/cover.jpg" alt="" onerror="this.parentNode.classList.add('is-empty'); this.remove();">
-      <div class="cover__placeholder" aria-hidden="true">
-        <span class="cover__big-date">01<em>/</em>03</span>
-        <span class="cover__small-year">MMXXVII</span>
-      </div>
-    </figure>
-
-    <dl class="cover__meta">
-      <div><dt>일시</dt><dd>2027년 1월 3일 일요일 낮 12시</dd></div>
-      <div><dt>장소</dt><dd>롯데호텔 서울 38층 무궁화</dd></div>
-    </dl>
-
-    <div class="cover__scroll" aria-hidden="true"><span></span></div>
+    <p class="date" aria-label="1월 3일">1<i>.</i>3</p>
+    <p class="when">2027년 1월 3일 일요일 낮 12시<br>롯데호텔 서울 38층 무궁화</p>
   </header>
 
-  <!-- ───────── 초대글 ───────── -->
-  <section class="section invite reveal">
-    <p class="label">Invitation</p>
-    <p class="invite__text">
-      서로 다른 계절을 지나온 두 사람이<br>
-      같은 겨울 앞에 섰습니다.
-    </p>
-    <p class="invite__text">
-      각자의 자리에서 걸어온 길이<br>
-      이제 하나의 길로 이어집니다.<br>
-      그 첫걸음을 내딛는 날,<br>
-      귀한 걸음으로 함께해 주시면<br>
-      오래도록 기쁨으로 간직하겠습니다.
-    </p>
-  </section>
+  <section class="letter">
+    <h2>새해 첫 일요일에<br>결혼합니다.</h2>
+    <p>한 해를 여는 날, 고마운 분들과<br>밥 한 끼 나누며 시작하고 싶습니다.<br>오셔서 자리를 함께해 주세요.</p>
 
-  <!-- ───────── 가족 ───────── -->
-  <section class="section family reveal">
-    <div class="family__row">
-      <p class="family__parents"><span>신동혁</span> · <span>최복순</span><small>의 아들</small></p>
-      <p class="family__person"><span class="family__role">신랑</span> 신승윤</p>
-    </div>
-    <div class="family__row">
-      <p class="family__parents"><span>최숙경</span><small>의 딸</small></p>
-      <p class="family__person"><span class="family__role">신부</span> 최유라</p>
-    </div>
-
-    <!-- 전화번호를 넣어주세요 (하이픈 없이). 비워두면 버튼이 사라집니다. -->
-    <div class="contact">
-      <a class="contact__btn" href="tel:" data-tel="">신랑에게 연락하기</a>
-      <a class="contact__btn" href="tel:" data-tel="">신부에게 연락하기</a>
-    </div>
-  </section>
-
-  <!-- ───────── 달력 ───────── -->
-  <section class="section calendar reveal">
-    <p class="label">2027. 01</p>
-    <h2 class="calendar__title">1월 3일, 일요일 낮 12시</h2>
-
-    <div class="cal" id="calendar" aria-label="2027년 1월 달력"></div>
-
-    <p class="dday">
-      <span class="dday__label">두 사람의 결혼식까지</span>
-      <span class="dday__num" id="dday">D-00</span>
-    </p>
-  </section>
-
-  <!-- ───────── 사진 ───────── -->
-  <section class="section gallery reveal" id="gallery">
-    <p class="label">Gallery</p>
-    <!--
-      images/ 폴더에 사진을 넣고 아래 목록을 수정하세요.
-      사진이 없으면 이 섹션은 자동으로 숨겨집니다.
-    -->
-    <div class="gallery__grid">
-      <img src="images/01.jpg" alt="" loading="lazy">
-      <img src="images/02.jpg" alt="" loading="lazy">
-      <img src="images/03.jpg" alt="" loading="lazy">
-      <img src="images/04.jpg" alt="" loading="lazy">
-      <img src="images/05.jpg" alt="" loading="lazy">
-      <img src="images/06.jpg" alt="" loading="lazy">
-    </div>
-  </section>
-
-  <!-- ───────── 장소 ───────── -->
-  <section class="section venue reveal">
-    <p class="label">Location</p>
-    <h2 class="venue__name">롯데호텔 서울 <span>38층 무궁화</span></h2>
-    <address class="venue__addr">
-      서울특별시 중구 을지로 30<br>
-      <a href="tel:0277711000">02-771-1000</a>
-    </address>
-
-    <div class="map">
-      <iframe
-        title="롯데호텔 서울 지도"
-        src="https://maps.google.com/maps?q=%EB%A1%AF%EB%8D%B0%ED%98%B8%ED%85%94%20%EC%84%9C%EC%9A%B8&z=16&ie=UTF8&output=embed"
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    </div>
-
-    <div class="map__links">
-      <a href="https://map.kakao.com/link/search/%EB%A1%AF%EB%8D%B0%ED%98%B8%ED%85%94%20%EC%84%9C%EC%9A%B8" target="_blank" rel="noopener">카카오맵</a>
-      <a href="https://map.naver.com/p/search/%EB%A1%AF%EB%8D%B0%ED%98%B8%ED%85%94%20%EC%84%9C%EC%9A%B8" target="_blank" rel="noopener">네이버지도</a>
-      <a href="tmap://search?name=%EB%A1%AF%EB%8D%B0%ED%98%B8%ED%85%94%20%EC%84%9C%EC%9A%B8">티맵</a>
-    </div>
-
-    <dl class="way">
+    <dl class="family">
       <div>
-        <dt>지하철</dt>
-        <dd>2호선 을지로입구역 7·8번 출구, 호텔과 바로 연결</dd>
+        <dt>신동혁 · 최복순의 아들</dt>
+        <dd>승윤</dd>
       </div>
       <div>
-        <dt>버스</dt>
-        <dd>을지로입구·롯데백화점 정류장 하차</dd>
-      </div>
-      <div>
-        <dt>주차</dt>
-        <dd>호텔 주차장 이용 (안내데스크에서 주차 등록)</dd>
+        <dt>최숙경의 딸</dt>
+        <dd>유라</dd>
       </div>
     </dl>
   </section>
 
-  <!-- ───────── 마음 전하실 곳 ───────── -->
-  <section class="section gift reveal">
-    <p class="label">With Love</p>
-    <p class="gift__intro">
-      멀리서도 마음을 전하고 싶으신 분들을 위해<br>
-      계좌번호를 안내드립니다.
-    </p>
-
-    <!-- 계좌 정보를 채워주세요. data-account 에는 하이픈 없이 숫자만. -->
-    <details class="acct">
-      <summary>신랑측 계좌번호</summary>
-      <ul>
-        <li data-account="">
-          <span class="acct__who">신랑 신승윤</span>
-          <span class="acct__num">은행명 000-000-000000</span>
-          <button type="button" class="acct__copy">복사</button>
-        </li>
-        <li data-account="">
-          <span class="acct__who">아버지 신동혁</span>
-          <span class="acct__num">은행명 000-000-000000</span>
-          <button type="button" class="acct__copy">복사</button>
-        </li>
-        <li data-account="">
-          <span class="acct__who">어머니 최복순</span>
-          <span class="acct__num">은행명 000-000-000000</span>
-          <button type="button" class="acct__copy">복사</button>
-        </li>
-      </ul>
-    </details>
-
-    <details class="acct">
-      <summary>신부측 계좌번호</summary>
-      <ul>
-        <li data-account="">
-          <span class="acct__who">신부 최유라</span>
-          <span class="acct__num">은행명 000-000-000000</span>
-          <button type="button" class="acct__copy">복사</button>
-        </li>
-        <li data-account="">
-          <span class="acct__who">어머니 최숙경</span>
-          <span class="acct__num">은행명 000-000-000000</span>
-          <button type="button" class="acct__copy">복사</button>
-        </li>
-      </ul>
-    </details>
+  <section class="month" aria-label="2027년 1월 달력">
+    <div class="month__head">
+      <h2>1월</h2>
+      <p id="dday" hidden></p>
+    </div>
+    <div class="cal">
+      <b>일</b><b>월</b><b>화</b><b>수</b><b>목</b><b>금</b><b>토</b>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span>1</span><span>2</span>
+      <span class="day"><em>3</em></span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+      <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+      <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+      <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+      <span>31</span>
+    </div>
   </section>
 
-  <!-- ───────── 마무리 ───────── -->
-  <footer class="closing reveal">
-    <p class="closing__line">
-      2027년 1월 3일,<br>
-      새해의 첫 주말에 뵙겠습니다.
-    </p>
-    <p class="closing__names">승윤 <span>&amp;</span> 유라</p>
+  <section class="place">
+    <h2>롯데호텔 서울<br><em>38층 무궁화</em></h2>
+    <p>서울 중구 을지로 30<br>2호선 을지로입구역에서 도보 3분</p>
+    <ul class="rows">
+      <li><a href="https://map.naver.com/p/search/%EB%A1%AF%EB%8D%B0%ED%98%B8%ED%85%94%20%EC%84%9C%EC%9A%B8" target="_blank" rel="noopener">네이버 지도<span>열기</span></a></li>
+      <li><a href="https://map.kakao.com/link/search/%EB%A1%AF%EB%8D%B0%ED%98%B8%ED%85%94%20%EC%84%9C%EC%9A%B8" target="_blank" rel="noopener">카카오맵<span>열기</span></a></li>
+      <li><button type="button" data-copy="서울 중구 을지로 30" data-done="주소를 복사했습니다">주소<span>복사</span></button></li>
+    </ul>
+  </section>
 
-    <div class="share">
-      <button type="button" class="share__btn" id="copyLink">청첩장 링크 복사</button>
-      <a class="share__btn" id="addCal" href="#" download="wedding.ics">캘린더에 저장</a>
-    </div>
+  <!-- script.js 의 PHOTOS, ACCOUNTS 를 채우면 나타납니다 -->
+  <section class="photos" id="photos" hidden></section>
+  <section class="gift" id="gift" hidden>
+    <h2>마음 전하실 곳</h2>
+    <ul class="rows" id="accounts"></ul>
+  </section>
+
+  <footer class="end">
+    <ul class="rows">
+      <li><a href="invite.ics">캘린더에 저장<span>받기</span></a></li>
+      <li><button type="button" id="share">청첩장 보내기<span>공유</span></button></li>
+    </ul>
+    <p>승윤<i>.</i>유라</p>
   </footer>
 
 </main>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
 <script src="script.js"></script>
 </body>
 </html>

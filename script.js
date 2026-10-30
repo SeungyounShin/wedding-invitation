@@ -1,121 +1,91 @@
-(() => {
-  const WEDDING = new Date(document.body.dataset.date);
-  const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+// 사진: images/ 에 넣고 파일명을 적으세요. 예) ['01.jpg', '02.jpg']
+const PHOTOS = [];
 
-  /* ── 달력 ── */
-  const cal = document.getElementById('calendar');
-  if (cal) {
-    const y = WEDDING.getFullYear();
-    const m = WEDDING.getMonth();
-    const first = new Date(y, m, 1).getDay();
-    const days = new Date(y, m + 1, 0).getDate();
-    const frag = document.createDocumentFragment();
+// 계좌: 예) { who: '신랑 신승윤', bank: '국민', number: '000000-00-000000' }
+const ACCOUNTS = [];
 
-    DOW.forEach(d => {
-      const el = document.createElement('div');
-      el.className = 'cal__dow';
-      el.textContent = d;
-      frag.appendChild(el);
-    });
-    for (let i = 0; i < first; i++) {
-      const el = document.createElement('div');
-      el.className = 'cal__day is-pad';
-      frag.appendChild(el);
-    }
-    for (let d = 1; d <= days; d++) {
-      const el = document.createElement('div');
-      el.className = 'cal__day' + (d === WEDDING.getDate() ? ' is-wedding' : '');
-      el.textContent = d;
-      frag.appendChild(el);
-    }
-    cal.appendChild(frag);
+const toast = document.getElementById('toast');
+let toastTimer;
+const showToast = msg => {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+};
+
+// 카카오톡 인앱 브라우저는 clipboard API가 막힐 때가 있어 execCommand로 한 번 더 시도한다
+const copy = async (text, msg) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    if (!ok) return showToast('복사하지 못했습니다');
   }
+  showToast(msg);
+};
 
-  /* ── 디데이 ── */
+// 보는 사람의 시간대와 상관없이 한국 날짜로 센다
+const kstDay = ms => Math.floor((ms + 9 * 3600000) / 86400000);
+const left = kstDay(Date.parse('2027-01-03T12:00:00+09:00')) - kstDay(Date.now());
+if (left >= 0) {
   const dday = document.getElementById('dday');
-  if (dday) {
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const target = new Date(WEDDING); target.setHours(0, 0, 0, 0);
-    const diff = Math.round((target - today) / 86400000);
-    if (diff > 0) dday.textContent = 'D-' + diff;
-    else if (diff === 0) { dday.textContent = 'D-Day'; dday.classList.add('is-today'); }
-    else dday.textContent = 'D+' + Math.abs(diff);
-  }
+  dday.textContent = left === 0 ? '오늘입니다' : `${left}일 남았습니다`;
+  dday.hidden = false;
+}
 
-  /* ── 연락 버튼: 번호 없으면 숨김 ── */
-  document.querySelectorAll('.contact__btn').forEach(a => {
-    const tel = a.dataset.tel.replace(/\D/g, '');
-    if (tel) a.href = 'tel:' + tel;
-    else a.hidden = true;
+if (PHOTOS.length) {
+  const box = document.getElementById('photos');
+  PHOTOS.forEach(name => {
+    const img = new Image();
+    img.src = `images/${name}`;
+    img.alt = '';
+    img.loading = 'lazy';
+    box.append(img);
   });
+  box.hidden = false;
+}
 
-  /* ── 갤러리: 깨진 이미지 제거, 전부 없으면 섹션 숨김 ── */
-  const gallery = document.getElementById('gallery');
-  if (gallery) {
-    const imgs = [...gallery.querySelectorAll('img')];
-    let pending = imgs.length;
-    const settle = () => { if (--pending === 0 && !gallery.querySelector('img')) gallery.hidden = true; };
-    imgs.forEach(img => {
-      img.addEventListener('load', settle, { once: true });
-      img.addEventListener('error', () => { img.remove(); settle(); }, { once: true });
-    });
-  }
+if (ACCOUNTS.length) {
+  const list = document.getElementById('accounts');
+  ACCOUNTS.forEach(({ who, bank, number }) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.dataset.copy = number;
+    btn.dataset.done = '계좌번호를 복사했습니다';
+    const label = document.createElement('div');
+    label.textContent = who;
+    const detail = document.createElement('small');
+    detail.textContent = `${bank} ${number}`;
+    label.append(detail);
+    const action = document.createElement('span');
+    action.textContent = '복사';
+    btn.append(label, action);
+    const li = document.createElement('li');
+    li.append(btn);
+    list.append(li);
+  });
+  document.getElementById('gift').hidden = false;
+}
 
-  /* ── 복사 ── */
-  const toast = document.getElementById('toast');
-  let toastTimer;
-  const showToast = msg => {
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
-  };
-  const copy = async (text, msg) => {
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-copy]');
+  if (btn) copy(btn.dataset.copy, btn.dataset.done);
+});
+
+document.getElementById('share').addEventListener('click', async () => {
+  const url = location.href.split('#')[0];
+  if (navigator.share) {
     try {
-      await navigator.clipboard.writeText(text);
-      showToast(msg);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); ta.remove();
-      showToast(msg);
-    }
-  };
-
-  document.querySelectorAll('.acct__copy').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const li = btn.closest('li');
-      const num = li.dataset.account || li.querySelector('.acct__num').textContent.replace(/[^\d-]/g, '');
-      copy(num, '계좌번호가 복사되었습니다');
-    });
-  });
-
-  const copyLink = document.getElementById('copyLink');
-  if (copyLink) copyLink.addEventListener('click', () => copy(location.href.split('#')[0], '링크가 복사되었습니다'));
-
-  /* ── .ics 생성 ── */
-  const addCal = document.getElementById('addCal');
-  if (addCal) {
-    const pad = n => String(n).padStart(2, '0');
-    const fmt = d => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-    const end = new Date(WEDDING.getTime() + 2 * 3600000);
-    const ics = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//wedding//KR',
-      'BEGIN:VEVENT',
-      `DTSTART;TZID=Asia/Seoul:${fmt(WEDDING)}`,
-      `DTEND;TZID=Asia/Seoul:${fmt(end)}`,
-      'SUMMARY:신승윤 · 최유라 결혼식',
-      'LOCATION:롯데호텔 서울 38층 무궁화 (서울 중구 을지로 30)',
-      'END:VEVENT', 'END:VCALENDAR'
-    ].join('\r\n');
-    addCal.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+      await navigator.share({ title: document.title, url });
+    } catch {}
+    return;
   }
-
-  /* ── 스크롤 등장 ── */
-  document.documentElement.classList.add('js');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-})();
+  copy(url, '링크를 복사했습니다');
+});
